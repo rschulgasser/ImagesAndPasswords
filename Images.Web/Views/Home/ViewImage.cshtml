@@ -1,0 +1,52 @@
+﻿@using Images.Data;
+@model ViewImageModel
+
+
+
+
+<div class="container">
+    <main role="main" class="pb-3">
+
+
+       
+            @if (Model.CorrectPassword)
+            {
+              
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <img src="/uploads/@Model.Image.ImageLocation" style="width: 800px;" />
+                        <br />
+                        <h3>Views: @Model.Image.NumberOfVeiws</h3>
+                    </div>
+                </div>
+                 
+            }
+            
+        
+
+
+
+            else
+            {
+
+
+
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 jumbotron">
+                        @if (!String.IsNullOrEmpty(Model.Password))
+                        {
+                            <h3 class="alert-danger">Invalid password</h3>
+                        }
+                        <h4>Please enter the password for this image:</h4>
+                        <form method="post" action="/home/viewimage">
+                            <input type="hidden" name="id" value="@Model.Image.Id" />
+                            <input type="password" class="form-control" placeholder="Password" name="password" />
+                            <br />
+                            <button class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+        }
+
+        </main>
+</div>
